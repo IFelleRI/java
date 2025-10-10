@@ -1,0 +1,22 @@
+<configuration>
+
+    <!-- Отключаем внутренние INFO/DEBUG Logback -->
+    <statusListener class="ch.qos.logback.core.status.NopStatusListener"/>
+
+    <!-- Настройка консольного вывода с цветами -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <withJansi>false</withJansi>
+        <encoder>
+            <pattern>%highlight([%d{HH:mm:ss}] %-5level %logger{36} - %msg%n)</pattern>
+        </encoder>
+    </appender>
+
+    <!-- root logger для твоих логов -->
+    <root level="debug">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+    <!-- Опционально: убираем шум от внутренних пакетов Logback -->
+    <logger name="ch.qos.logback" level="WARN"/>
+
+</configuration>
