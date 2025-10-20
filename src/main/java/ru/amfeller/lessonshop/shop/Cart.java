@@ -15,8 +15,22 @@ public class Cart {
             return;
         }
         Product[] tmpArr = new Product[products.length + 1];
-        System.arraycopy(products, 0, tmpArr, 0, products.length);
+        for (int i = 0; i < products.length; i++) {
+            tmpArr[i] = products[i];
+        }
         tmpArr[tmpArr.length - 1] = product;
+        this.products = tmpArr;
+    }
+
+    public void removeProduct(int product) {
+        products[product] = null;
+        Product[] tmpArr = new Product[products.length - 1];
+        for (int i = 0, j = 0; i < products.length; i++) {
+            if (products[i] == null) {
+                continue;
+            }
+            tmpArr[j++] = products[i];
+        }
         this.products = tmpArr;
     }
 
@@ -33,11 +47,11 @@ public class Cart {
                 "Доставка",
                 deliveryPrice + " руб.");
         System.out.println("----------------------------------------");
-        System.out.format("%-15s %10s%n", "Итого:", calcSum()+deliveryPrice + " руб.");
-        deleteProduct();
+        System.out.format("%-15s %10s%n", "Итого:", calcSum() + deliveryPrice + " руб.");
+        clear();
     }
 
-    public void deleteProduct() {
+    public void clear() {
         this.sum = 0;
         this.products = null;
     }
@@ -53,18 +67,11 @@ public class Cart {
         return products;
     }
 
+
     public TypeProduct getType() {
         for (Product product : products) {
             if (product.getType() == TypeProduct.DELICATE) return TypeProduct.DELICATE;
         }
         return TypeProduct.DEFAULT;
-    }
-
-    @Override
-    public String toString() {
-        return "Cart{" +
-                "products=" + Arrays.toString(products) +
-                ", sum=" + sum +
-                '}';
     }
 }

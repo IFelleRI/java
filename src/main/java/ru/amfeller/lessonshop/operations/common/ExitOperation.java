@@ -1,11 +1,11 @@
 package ru.amfeller.lessonshop.operations.common;
 
-
 import ru.amfeller.lessonshop.operations.Operation;
 
-public class BackToMainMenuOperation implements Operation {
+public class ExitOperation implements Operation {
     @Override
     public void doOperation() {
-        System.out.println("В главное меню");
+        System.out.println("Выход из магазин");
+        System.exit(0);
     }
 }

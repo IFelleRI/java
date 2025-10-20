@@ -1,48 +1,48 @@
 package ru.amfeller.lessonshop.user;
 
+import ru.amfeller.lessonshop.shop.Cart;
+
 import java.util.Scanner;
 
 public class Auth {
     public static final Scanner scanner = new Scanner(System.in);
-    private static User[] users = new User[]{};
 
-    public User init(User user) {
+    public User start() {
         while (true) {
             System.out.println();
             System.out.println("Авторизация");
             System.out.println("----------------------------------------");
             System.out.print("Введите логин: ");
-            String username = scanner.nextLine();
+            String login = scanner.nextLine();
             System.out.print("Введите пароль: ");
             String password = scanner.nextLine();
 
-            user.setLogin(username);
-            user.setPassword(password);
+            User user = login(login, password);
 
-            User existingUser = existUser(user);
-            if (existingUser != null) {
-                System.out.println("Пользователь авторизован: " + existingUser.getLogin());
-                return existingUser;
-            }
-            if (this.register(user)) {
-                System.out.println("Пользователь авторизован");
+            if(user != null) {
+                user.setUserState(State.AUTHENTICATED);
                 return user;
             }
         }
     }
+    private User login(String login, String password) {
+        User authUser = new User(login, password);
+        User existsUser = DataBase.exists(authUser);
 
-    private User existUser(User currentUser) {
-        for (User user : users) {
-            if (currentUser.equals(user)) {
-                return user;
-            }
+        if(existsUser != null) {
+            System.out.println("Пользователь авторизован");
+            return existsUser;
+        }
+        if(register(login, password)) {
+            DataBase.add(authUser);
+            authUser.setCart(new Cart());
+            System.out.println("Пользователь зареган и авторизован");
+            return authUser;
         }
         return null;
     }
 
-    private boolean register(User user) {
-        String login = user.getLogin();
-        String password = user.getPassword();
+    private boolean register(String login, String password) {
         try {
             if (isNotValid(login)) {
                 throw new WrongLoginException("Логин содержит недопустимые символы");
@@ -54,19 +54,11 @@ public class Auth {
             } else if (password.length() < 6 || password.length() > 20) {
                 throw new WrongPasswordException("Неправильная длина пароля");
             }
-            this.addUser(user);
             return true;
         } catch (WrongLoginException | WrongPasswordException e) {
             System.out.println("Ошибка: " + e.getMessage());
             return false;
         }
-    }
-
-    private void addUser(User user) {
-        User[] tmpArr = new User[users.length + 1];
-        System.arraycopy(users, 0, tmpArr, 0, users.length);
-        tmpArr[tmpArr.length - 1] = user;
-        users = tmpArr;
     }
 
     private boolean isValid(String input) {

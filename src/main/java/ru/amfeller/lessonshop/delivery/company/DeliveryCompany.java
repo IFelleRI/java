@@ -1,18 +1,20 @@
 package ru.amfeller.lessonshop.delivery.company;
 
-import ru.amfeller.lessonshop.delivery.DeliveryService;
-import ru.amfeller.lessonshop.delivery.pack.Package;
+import ru.amfeller.lessonshop.delivery.DeliveryPackage;
 import ru.amfeller.lessonshop.shop.ShopUtils;
+import ru.amfeller.lessonshop.shop.product.Product;
 import ru.amfeller.lessonshop.shop.product.TypeProduct;
 
-public abstract class Company implements DeliveryService {
+import java.util.Arrays;
+
+public abstract class DeliveryCompany implements DeliveryService {
     protected TypeProduct[] typeProducts;
     protected int speed;
     protected int price;
     protected String name;
     private int deliveryPrice;
 
-    public Company(String name, TypeProduct[] types, int speed, int price) {
+    public DeliveryCompany(String name, TypeProduct[] types, int speed, int price) {
         this.speed = speed;
         this.price = price;
         this.name = name;
@@ -27,8 +29,7 @@ public abstract class Company implements DeliveryService {
         return name;
     }
 
-    @Override
-    public void deliver(Package pack) {
+    public void info(DeliveryPackage pack) {
         this.deliveryPrice = calculateCost(pack);
         System.out.println("Компания доставки: " + name);
         System.out.println("Адрес доставки: " + pack.getAddress());
@@ -36,8 +37,29 @@ public abstract class Company implements DeliveryService {
         System.out.println("Стоимость доставки: " + calculateCost(pack) + " руб.");
     }
 
+    public boolean canDeliver(Product[] products) {
+        boolean allow;
+        for (Product product : products) {
+            allow = false;
+            for (TypeProduct typeProduct : typeProducts) {
+                if (product.getType() == typeProduct) {
+                    allow = true;
+                }
+            }
+            if (!allow) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     @Override
-    public int calculateCost(Package pack) {
+    public void deliver(DeliveryPackage pack) {
+        System.out.println("Отправлено!");
+    }
+
+    @Override
+    public int calculateCost(DeliveryPackage pack) {
         return this.price * pack.getProducts().length;
     }
 

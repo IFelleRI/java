@@ -8,51 +8,27 @@ public class User {
     private String login;
     private String password;
     private Cart cart;
-    private String[] state = new String[]{""};
+    private String userState;
 
-    public User() {
+    public User(String login, String password) {
+        this.login = login;
+        this.password = password;
     }
 
     public Cart getCart() {
         return this.cart;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    protected void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    protected void setLogin(String login) {
-        this.login = login;
-    }
-
     public void setCart(Cart cart) {
         this.cart = cart;
     }
 
-    public StringBuilder getTrackAction() {
-        StringBuilder track = new StringBuilder();
-        for (String stateItem : state) {
-            track.append(stateItem).append("\n ");
-        }
-        return track;
+    public void getUserState() {
+        System.out.println(userState);
     }
 
-    public void setTrackAction(String action) {
-        if (state == null) {
-            state = new String[]{action};
-        }
-        String[] tmpArr = new String[state.length + 1];
-        System.arraycopy(state, 0, tmpArr, 0, state.length);
-        tmpArr[tmpArr.length - 1] = action;
-        this.state = tmpArr;
+    public void setUserState(State userState) {
+        this.userState += userState+"\n";
     }
 
     @Override

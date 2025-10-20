@@ -15,11 +15,11 @@ public class Category {
         this.products = products;
     }
 
-    protected String getName() {
+    public String getName() {
         return name;
     }
 
-    protected Product[] getProducts() {
+    public Product[] getProducts() {
         return products;
     }
 
