@@ -11,7 +11,7 @@ public class CDEK extends DeliveryCompany {
     @Override
     public int calculateSpeed(DeliveryPackage pack) {
         int speed = this.speed;
-        for (TypeProduct product : pack.getType()) {
+        for (TypeProduct product : pack.getTypes()) {
             if (product == TypeProduct.HEAVY) {
                 speed += 2;
                 break;

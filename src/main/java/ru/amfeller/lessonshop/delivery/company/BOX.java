@@ -13,7 +13,7 @@ public class BOX extends DeliveryCompany {
     @Override
     public int calculateSpeed(DeliveryPackage pack) {
         int speed = this.speed;
-        for (TypeProduct product : pack.getType()) {
+        for (TypeProduct product : pack.getTypes()) {
             if (product == TypeProduct.DEFAULT) {
                 speed += 1;
                 this.hasDelicateProduct = true;

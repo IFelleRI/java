@@ -30,7 +30,7 @@ public abstract class DeliveryCompany implements DeliveryService {
     }
 
     public void info(DeliveryPackage pack) {
-        this.deliveryPrice = calculateCost(pack);
+        this.deliveryPrice = calculateCost(pack); // FixMe: bug
         System.out.println("Компания доставки: " + name);
         System.out.println("Адрес доставки: " + pack.getAddress());
         System.out.println("Срок доставки: " + calculateSpeed(pack) + " " + ShopUtils.pluralize(calculateSpeed(pack), "день", "дня", "дней"));
@@ -59,7 +59,7 @@ public abstract class DeliveryCompany implements DeliveryService {
     }
 
     @Override
-    public int calculateCost(DeliveryPackage pack) {
+    public int calculateCost(DeliveryPackage pack) { // FixMe: abstract
         return this.price * pack.getProducts().length;
     }
 

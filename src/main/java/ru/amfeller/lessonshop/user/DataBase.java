@@ -10,7 +10,7 @@ public class DataBase {
         DataBase.userData = tmpArr;
     }
 
-    public static User exists(User currentUser) {
+    public static User getUser(User currentUser) {
         for (User user : DataBase.userData) {
             if (currentUser.equals(user)) {
                 return user;

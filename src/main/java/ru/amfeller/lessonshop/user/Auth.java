@@ -19,21 +19,22 @@ public class Auth {
 
             User user = login(login, password);
 
-            if(user != null) {
+            if (user != null) {
                 user.setUserState(State.AUTHENTICATED);
                 return user;
             }
         }
     }
+
     private User login(String login, String password) {
         User authUser = new User(login, password);
-        User existsUser = DataBase.exists(authUser);
+        User existsUser = DataBase.getUser(authUser);
 
-        if(existsUser != null) {
+        if (existsUser != null) {
             System.out.println("Пользователь авторизован");
             return existsUser;
         }
-        if(register(login, password)) {
+        if (register(login, password)) {
             DataBase.add(authUser);
             authUser.setCart(new Cart());
             System.out.println("Пользователь зареган и авторизован");

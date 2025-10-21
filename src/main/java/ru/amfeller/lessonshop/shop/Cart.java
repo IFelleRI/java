@@ -3,8 +3,6 @@ package ru.amfeller.lessonshop.shop;
 import ru.amfeller.lessonshop.shop.product.Product;
 import ru.amfeller.lessonshop.shop.product.TypeProduct;
 
-import java.util.Arrays;
-
 public class Cart {
     private Product[] products;
     private int sum;
@@ -67,11 +65,4 @@ public class Cart {
         return products;
     }
 
-
-    public TypeProduct getType() {
-        for (Product product : products) {
-            if (product.getType() == TypeProduct.DELICATE) return TypeProduct.DELICATE;
-        }
-        return TypeProduct.DEFAULT;
-    }
 }

@@ -23,7 +23,7 @@ public class DeliveryPackage {
         return address;
     }
 
-    public TypeProduct[] getType() {
+    public TypeProduct[] getTypes() {
         TypeProduct[] foundTypes = new TypeProduct[0];
         for (Product product : products) {
             TypeProduct currentType = product.getType();

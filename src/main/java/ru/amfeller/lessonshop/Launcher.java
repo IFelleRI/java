@@ -11,19 +11,16 @@ import ru.amfeller.lessonshop.shop.product.Product;
 import ru.amfeller.lessonshop.shop.product.TypeProduct;
 
 public class Launcher {
-    private Category[] categories;
-    private DeliveryCompany[] companies;
-    private Menu menu;
 
-    public Launcher() {
-        initCategory();
-        initCompanies();
+    public void initialization() {
+        Category[] categories = initCategory();
+        DeliveryCompany[] companies = initCompanies();
         Shop shop = new Shop(categories, companies);
         shop.init();
     }
 
-    private void initCategory() {
-        categories = new Category[]{
+    private Category[] initCategory() {
+        return new Category[]{
                 new Category("Кровати", new Product[]{
                         new Product("Кровать", 1000),
                         new Product("Кровать 2", 2000),
@@ -42,7 +39,7 @@ public class Launcher {
         };
     }
 
-    private void initCompanies() {
-        this.companies = new DeliveryCompany[]{new CDEK(), new BOX(),new PochtaRF()};
+    private DeliveryCompany[] initCompanies() {
+        return new DeliveryCompany[]{new CDEK(), new BOX(),new PochtaRF()};
     }
 }

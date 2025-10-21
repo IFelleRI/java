@@ -15,7 +15,7 @@ public class PochtaRF extends DeliveryCompany {
     public int calculateSpeed(DeliveryPackage pack) {
         int speed = this.speed;
 
-        for (TypeProduct product : pack.getType()) {
+        for (TypeProduct product : pack.getTypes()) {
             if (product == TypeProduct.HEAVY) {
                 speed += 3;
                 this.hasHeavyProduct = true;
