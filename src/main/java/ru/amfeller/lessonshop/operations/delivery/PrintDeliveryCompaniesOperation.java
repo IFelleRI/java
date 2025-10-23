@@ -19,13 +19,13 @@ public class PrintDeliveryCompaniesOperation implements Operation {
 
     @Override
     public void doOperation() {
-        if (shopSession.getCompany() != null) {
+        if (shopSession.getDeliveryCompany() != null) {
             MenuNavigator.stepBack = true;
             MenuNavigator.showTitle = false;
             return;
         }
         checkTypeDeliveryCompanies();
-        System.out.println(ShopUtils.printCategories(shopSession.getCompanies()));
+        ShopUtils.printToConsole(shopSession.getCompanies(),"Компания");
         this.shopSession.getUser().setUserState(this.state);
     }
 

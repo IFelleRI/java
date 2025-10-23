@@ -5,14 +5,11 @@ import ru.amfeller.lessonshop.shop.ShopUtils;
 import ru.amfeller.lessonshop.shop.product.Product;
 import ru.amfeller.lessonshop.shop.product.TypeProduct;
 
-import java.util.Arrays;
-
 public abstract class DeliveryCompany implements DeliveryService {
     protected TypeProduct[] typeProducts;
     protected int speed;
     protected int price;
     protected String name;
-    private int deliveryPrice;
 
     public DeliveryCompany(String name, TypeProduct[] types, int speed, int price) {
         this.speed = speed;
@@ -21,20 +18,34 @@ public abstract class DeliveryCompany implements DeliveryService {
         this.typeProducts = types;
     }
 
+    public void info(DeliveryPackage pack) {
+        int currentSpeed = calculateSpeed(pack);
+        int currenPrice = calculateCost(pack);
+        System.out.println("Компания доставки: " + name);
+        System.out.println("Адрес доставки: " + pack.getAddress());
+        System.out.println("Срок доставки: " + currentSpeed + " " + ShopUtils.pluralize(currentSpeed, "день", "дня", "дней"));
+        System.out.println("Стоимость доставки: " + currenPrice + " руб.");
+    }
+
+    protected <K, V> int getExtraValue(K[] key, V[] value, DeliveryPackage pack) {
+        int extraValue = 0;
+        for (int i = 0; i < pack.getTypes().length; i++) {
+            for (int j = 0; j < key.length; j++) {
+                if (pack.getTypes()[i] == key[j]) {
+                    extraValue += (Integer) value[j];
+                    break;
+                }
+            }
+        }
+        return extraValue;
+    }
+
     public int getDeliveryPrice() {
-        return this.deliveryPrice;
+        return this.price;
     }
 
     public String getName() {
         return name;
-    }
-
-    public void info(DeliveryPackage pack) {
-        this.deliveryPrice = calculateCost(pack); // FixMe: bug
-        System.out.println("Компания доставки: " + name);
-        System.out.println("Адрес доставки: " + pack.getAddress());
-        System.out.println("Срок доставки: " + calculateSpeed(pack) + " " + ShopUtils.pluralize(calculateSpeed(pack), "день", "дня", "дней"));
-        System.out.println("Стоимость доставки: " + calculateCost(pack) + " руб.");
     }
 
     public boolean canDeliver(Product[] products) {
@@ -54,14 +65,10 @@ public abstract class DeliveryCompany implements DeliveryService {
     }
 
     @Override
-    public void deliver(DeliveryPackage pack) {
-        System.out.println("Отправлено!");
-    }
+    public abstract void deliver();
 
     @Override
-    public int calculateCost(DeliveryPackage pack) { // FixMe: abstract
-        return this.price * pack.getProducts().length;
-    }
+    public abstract int calculateCost(DeliveryPackage pack);
 
     @Override
     public String toString() {

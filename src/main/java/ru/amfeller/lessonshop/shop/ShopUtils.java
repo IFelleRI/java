@@ -1,8 +1,6 @@
 package ru.amfeller.lessonshop.shop;
 
-import ru.amfeller.lessonshop.delivery.company.DeliveryCompany;
 import ru.amfeller.lessonshop.shop.product.Product;
-import ru.amfeller.lessonshop.user.State;
 
 import java.util.Scanner;
 
@@ -16,48 +14,6 @@ public class ShopUtils {
         if (lastDigit > 1 && lastDigit < 5) return two;
         if (lastDigit == 1) return one;
         return five;
-    }
-
-    public static void print(Enum[] menuItems) {
-        System.out.println("Список операций: ");
-        for (Enum menuItem : menuItems) {
-            System.out.println((menuItem.ordinal() + 1) + ". " + menuItem);
-        }
-        System.out.print("Выбрать операцию: ");
-    }
-
-    protected static int getChoice(Enum[] menuItems, String title) {
-        int choice;
-        while (true) {
-            try {
-                if (!title.isEmpty()) {
-                    ShopUtils.showTitle(title);
-                }
-                ShopUtils.print(menuItems);
-                choice = ShopUtils.checkChoice(menuItems.length);
-                break;
-            } catch (WrongChoiceException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-        return choice;
-    }
-
-    public static int getChoice(Object[] menuItems, String title) {
-        int choice;
-        while (true) {
-            try {
-                for (int i = 0; i < menuItems.length; i++) {
-                    System.out.println((i + 1) + ". " + menuItems[i]);
-                }
-                System.out.print(title);
-                choice = (ShopUtils.checkChoice(menuItems.length) - 1);
-                break;
-            } catch (WrongChoiceException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-        return choice;
     }
 
     public static int getChoice(int length, String title) {
@@ -106,25 +62,14 @@ public class ShopUtils {
         return sb.toString();
     }
 
-    public static String printCategories(Category[] categories) {
+    public static <T> void printToConsole(T[] array, String title) {
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format("%-5s %-15s%n", "№", "Категория"));
+        sb.append(String.format("%-5s %-15s%n", "№", title));
         sb.append("----------------------------------------------------------\n");
-        for (int i = 0; i < categories.length; i++) {
-            sb.append(String.format("%-5d %-15s%n", i + 1, categories[i]));
+        for (int i = 0; i < array.length; i++) {
+            sb.append(String.format("%-5d %-15s%n", i + 1, array[i]));
         }
         sb.append("----------------------------------------------------------\n");
-        return sb.toString();
-    }
-
-    public static String printCategories(DeliveryCompany[] companies) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(String.format("%-5s %-15s%n", "№", "Компания"));
-        sb.append("----------------------------------------------------------\n");
-        for (int i = 0; i < companies.length; i++) {
-            sb.append(String.format("%-5d %-15s%n", i + 1, companies[i]));
-        }
-        sb.append("----------------------------------------------------------\n");
-        return sb.toString();
+        System.out.println(sb);
     }
 }

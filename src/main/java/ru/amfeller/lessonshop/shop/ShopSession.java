@@ -32,14 +32,15 @@ public class ShopSession {
         return cart;
     }
 
-    public Product[] getProducts() {
+    public Product[] getCategoryProducts() {
         if (category != null && category.getProducts() != null) {
             return category.getProducts();
         }
-        if(getCart().getProducts() != null) {
-            return getCart().getProducts();
-        }
         return null;
+    }
+
+    public Product[] getCartProducts() {
+        return getCart().getProducts();
     }
 
     public void setCategory(Category category) {
@@ -62,11 +63,11 @@ public class ShopSession {
         return tmpDeliveryCompany;
     }
 
-    public DeliveryCompany getCompany() {
+    public DeliveryCompany getDeliveryCompany() {
         return deliveryCompany;
     }
 
-    public void setCompany() {
+    public void setDeliveryCompany() {
         this.deliveryCompany = this.tmpDeliveryCompany;
     }
 

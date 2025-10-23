@@ -6,7 +6,7 @@ import ru.amfeller.lessonshop.shop.ShopSession;
 import ru.amfeller.lessonshop.shop.ShopUtils;
 
 public class ChoiceDeliveryCompanyOperation implements Operation {
-    private ShopSession shopSession;
+    private final ShopSession shopSession;
 
     public ChoiceDeliveryCompanyOperation(ShopSession shopSession) {
         this.shopSession = shopSession;
@@ -15,7 +15,7 @@ public class ChoiceDeliveryCompanyOperation implements Operation {
     @Override
     public void doOperation() {
         DeliveryCompany[] companies = shopSession.getCompanies();
-        System.out.println(ShopUtils.printCategories(companies));
+        ShopUtils.printToConsole(companies,"Компания");
         System.out.print("Введите № компании: ");
         int option = ShopUtils.getChoice(companies.length, "");
         DeliveryCompany currentDeliveryCompany = companies[option];

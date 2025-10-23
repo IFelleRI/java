@@ -10,14 +10,18 @@ public class CDEK extends DeliveryCompany {
 
     @Override
     public int calculateSpeed(DeliveryPackage pack) {
-        int speed = this.speed;
-        for (TypeProduct product : pack.getTypes()) {
-            if (product == TypeProduct.HEAVY) {
-                speed += 2;
-                break;
-            }
-        }
-        speed += pack.getProducts().length;
-        return speed;
+        int extraSpeed = getExtraValue(new TypeProduct[]{TypeProduct.HEAVY}, new Integer[]{2}, pack);
+        return this.speed + pack.getProducts().length + extraSpeed;
+    }
+
+    @Override
+    public int calculateCost(DeliveryPackage pack) {
+        int extraPrice = getExtraValue(new TypeProduct[]{TypeProduct.HEAVY}, new Integer[]{500}, pack);
+        return (this.price * pack.getProducts().length) + extraPrice;
+    }
+
+    @Override
+    public void deliver() {
+        System.out.println("Отправлено");
     }
 }

@@ -5,16 +5,13 @@ import ru.amfeller.lessonshop.operations.Operation;
 import ru.amfeller.lessonshop.shop.Cart;
 import ru.amfeller.lessonshop.shop.ShopSession;
 import ru.amfeller.lessonshop.user.State;
-import ru.amfeller.lessonshop.user.User;
 
 public class PurchaseCartOperation implements Operation {
-    private final User user;
     private final Cart cart;
     private final ShopSession shopSession;
     private final State state;
 
     public PurchaseCartOperation(ShopSession shopSession, State state) {
-        this.user = shopSession.getUser();
         this.cart = shopSession.getCart();
         this.shopSession = shopSession;
         this.state = state;
@@ -22,13 +19,14 @@ public class PurchaseCartOperation implements Operation {
 
     @Override
     public void doOperation() {
-        if(shopSession.getCompany() == null) {
+        if(shopSession.getDeliveryCompany() == null) {
             System.out.println("Не выбрана компания доставки!");
             MenuNavigator.stepBack = true;
             return;
         }
-        cart.buy(shopSession.getCompany().getDeliveryPrice());
+        cart.buy(shopSession.getDeliveryCompany().getDeliveryPrice());
         MenuNavigator.homeBack = true;
         this.shopSession.getUser().setUserState(this.state);
+        this.shopSession.getDeliveryCompany().deliver();
     }
 }

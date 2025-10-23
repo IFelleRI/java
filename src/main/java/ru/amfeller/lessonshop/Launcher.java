@@ -4,7 +4,6 @@ import ru.amfeller.lessonshop.delivery.company.BOX;
 import ru.amfeller.lessonshop.delivery.company.CDEK;
 import ru.amfeller.lessonshop.delivery.company.DeliveryCompany;
 import ru.amfeller.lessonshop.delivery.company.PochtaRF;
-import ru.amfeller.lessonshop.menu.Menu;
 import ru.amfeller.lessonshop.shop.Category;
 import ru.amfeller.lessonshop.shop.Shop;
 import ru.amfeller.lessonshop.shop.product.Product;
@@ -32,7 +31,7 @@ public class Launcher {
                         new Product("Набор ножей", 3000, TypeProduct.DELICATE)
                 }),
                 new Category("Диваны", new Product[]{
-                        new Product("Диван", 1000),
+                        new Product("Диван", 1000, TypeProduct.HEAVY),
                         new Product("Диван 2", 2000, TypeProduct.HEAVY),
                         new Product("Диван 3", 3000, TypeProduct.HEAVY),
                 })

@@ -29,6 +29,9 @@ public class MenuGenerator {
     }
 
     public void init() {
+
+
+
         MenuComponent back = new MenuItem("Назад", new BackOperation());
         MenuComponent backToHome = new MenuItem("В главное меню", new BackToMainMenuOperation());
 
@@ -51,6 +54,7 @@ public class MenuGenerator {
         MenuComponent categoryList = new Menu("Категории", new PrintCategoriesOperation(shopSession,State.VIEWING_CATEGORIES));
         MenuComponent cartMenu = new Menu("Корзина", new ShowCartOperation(shopSession,State.VIEWING_CATEGORIES));
         MenuComponent mainMenu = new Menu("Главное меню");
+
 
         addSubItems(
                 viewDeliveryCompanyInfo,

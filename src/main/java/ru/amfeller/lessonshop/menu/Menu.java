@@ -4,9 +4,6 @@ import ru.amfeller.lessonshop.operations.Operation;
 import ru.amfeller.lessonshop.operations.common.BackOperation;
 import ru.amfeller.lessonshop.operations.common.BackToMainMenuOperation;
 import ru.amfeller.lessonshop.shop.ShopUtils;
-import ru.amfeller.lessonshop.user.State;
-
-
 
 public class Menu implements MenuComponent {
     private MenuComponent[] items;
@@ -55,11 +52,11 @@ public class Menu implements MenuComponent {
             if (this.skipToBack) {
                 if (MenuNavigator.stepBack) break;
                 operation.doOperation();
-                if(this.items == null) break;
+                if (this.items == null) break;
                 items[0].doAction();
             } else {
                 MenuNavigator.stepBack = false;
-                if(MenuNavigator.showTitle){
+                if (MenuNavigator.showTitle) {
                     ShopUtils.showTitle(title);
                 }
                 if (operation != null) {

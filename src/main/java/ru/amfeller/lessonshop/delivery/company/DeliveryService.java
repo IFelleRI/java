@@ -3,7 +3,7 @@ package ru.amfeller.lessonshop.delivery.company;
 import ru.amfeller.lessonshop.delivery.DeliveryPackage;
 
 public interface DeliveryService {
-    void deliver(DeliveryPackage pack); // FixMe: ?
+    void deliver();
 
     int calculateSpeed(DeliveryPackage pack);
 

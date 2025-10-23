@@ -15,7 +15,7 @@ public class DeleteProductOperation implements Operation {
     }
     @Override
     public void doOperation() {
-        Product[] products = shopSession.getProducts();
+        Product[] products = shopSession.getCategoryProducts();
         Cart cart = shopSession.getCart();
         System.out.print("Введите № товара: ");
         int option = ShopUtils.getChoice(products.length, "");

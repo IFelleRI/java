@@ -6,7 +6,7 @@ import ru.amfeller.lessonshop.shop.ShopSession;
 
 public class ConfirmDeliverySelectionOperation implements Operation {
 
-    private ShopSession shopSession;
+    private final ShopSession shopSession;
 
     public ConfirmDeliverySelectionOperation(ShopSession shopSession) {
         this.shopSession = shopSession;
@@ -14,8 +14,8 @@ public class ConfirmDeliverySelectionOperation implements Operation {
 
     @Override
     public void doOperation() {
-        this.shopSession.setCompany();
+        this.shopSession.setDeliveryCompany();
         MenuNavigator.showTitle = false;
-        System.out.println("Выбрали: "+this.shopSession.getCompany().getName());
+        System.out.println("Выбрали: " + this.shopSession.getDeliveryCompany().getName());
     }
 }

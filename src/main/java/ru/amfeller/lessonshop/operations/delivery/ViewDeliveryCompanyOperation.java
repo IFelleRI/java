@@ -20,7 +20,7 @@ public class ViewDeliveryCompanyOperation implements Operation {
 
     @Override
     public void doOperation() {
-        if (shopSession.getCompany() != null) {
+        if (shopSession.getDeliveryCompany() != null) {
             MenuNavigator.stepBack = true;
             MenuNavigator.showTitle = true;
             return;
@@ -38,7 +38,7 @@ public class ViewDeliveryCompanyOperation implements Operation {
     private DeliveryPackage createDeliveryPackage() {
         return new DeliveryPackage(
                 this.shopSession.getUser(),
-                this.shopSession.getProducts(),
+                this.shopSession.getCartProducts(),
                 address
         );
     }

@@ -1,10 +1,10 @@
 package ru.amfeller.lessonshop.delivery;
 
 public class Address {
-    private String houseNumber;
-    private String street;
-    private String city;
-    private String country;
+    private final String houseNumber;
+    private final String street;
+    private final String city;
+    private final String country;
 
     public Address(String country, String city,String street,String houseNumber) {
         this.houseNumber = houseNumber;

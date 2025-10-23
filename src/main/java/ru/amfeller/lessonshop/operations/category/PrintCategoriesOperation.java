@@ -16,7 +16,7 @@ public class PrintCategoriesOperation implements Operation {
 
     @Override
     public void doOperation() {
-        System.out.println(ShopUtils.printCategories(shopSession.getCategories()));
+        ShopUtils.printToConsole(shopSession.getCategories(),"Категория");
         this.shopSession.getUser().setUserState(this.state);
     }
 }
