@@ -4,18 +4,20 @@ import ru.amfeller.lessonshop.shop.product.Product;
 import ru.amfeller.lessonshop.shop.product.TypeProduct;
 import ru.amfeller.lessonshop.user.User;
 
+import java.util.ArrayList;
+
 public class DeliveryPackage {
     protected User user;
-    protected Product[] products;
+    protected ArrayList<Product> products;
     protected Address address;
 
-    public DeliveryPackage(User user, Product[] products, Address address) {
+    public DeliveryPackage(User user, ArrayList<Product> products, Address address) {
         this.user = user;
         this.products = products;
         this.address = address;
     }
 
-    public Product[] getProducts() {
+    public ArrayList<Product> getProducts() {
         return products;
     }
 
@@ -23,8 +25,8 @@ public class DeliveryPackage {
         return address;
     }
 
-    public TypeProduct[] getTypes() {
-        TypeProduct[] foundTypes = new TypeProduct[0];
+    public ArrayList<TypeProduct> getTypes() {
+        ArrayList<TypeProduct> foundTypes = new ArrayList<>();
         for (Product product : products) {
             TypeProduct currentType = product.getType();
             boolean exists = false;
@@ -35,12 +37,7 @@ public class DeliveryPackage {
                 }
             }
             if (!exists) {
-                TypeProduct[] newArray = new TypeProduct[foundTypes.length + 1];
-                for (int i = 0; i < foundTypes.length; i++) {
-                    newArray[i] = foundTypes[i];
-                }
-                newArray[newArray.length - 1] = currentType;
-                foundTypes = newArray;
+                foundTypes.add(currentType);
             }
         }
         return foundTypes;

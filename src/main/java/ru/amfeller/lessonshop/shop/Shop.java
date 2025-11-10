@@ -5,19 +5,21 @@ import ru.amfeller.lessonshop.menu.MenuGenerator;
 import ru.amfeller.lessonshop.user.Auth;
 import ru.amfeller.lessonshop.user.User;
 
-public class Shop {
-    private final Category[] categories;
-    private final DeliveryCompany[] companies;
+import java.util.ArrayList;
 
-    public Shop(Category[] categories, DeliveryCompany[] companies) {
+public class Shop {
+    private final ArrayList<Category> categories;
+    private final ArrayList<DeliveryCompany> deliveryCompanies;
+
+    public Shop(ArrayList<Category> categories, ArrayList<DeliveryCompany> companies) {
         this.categories = categories;
-        this.companies = companies;
+        this.deliveryCompanies = companies;
     }
 
     public void init() {
         User user = new Auth().start();
         Cart cart = user.getCart();
-        ShopSession shopSession = new ShopSession(cart, this.categories, this.companies, user);
+        ShopSession shopSession = new ShopSession(cart, this.categories, this.deliveryCompanies, user);
         MenuGenerator menu = new MenuGenerator(shopSession,this);
         menu.init();
     }

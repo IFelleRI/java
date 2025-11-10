@@ -5,17 +5,21 @@ import ru.amfeller.lessonshop.shop.ShopUtils;
 import ru.amfeller.lessonshop.shop.product.Product;
 import ru.amfeller.lessonshop.shop.product.TypeProduct;
 
-public abstract class DeliveryCompany implements DeliveryService {
-    protected TypeProduct[] typeProducts;
-    protected int speed;
-    protected int price;
-    protected String name;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-    public DeliveryCompany(String name, TypeProduct[] types, int speed, int price) {
+public abstract class DeliveryCompany implements DeliveryService {
+    protected ArrayList<TypeProduct> typeProducts;
+    protected Map<TypeProduct, Integer> speed;
+    protected Map<TypeProduct, Integer> price;
+    protected String name;
+    protected int resultPrice;
+
+    public DeliveryCompany(String name,  Map<TypeProduct, Integer> speed, Map<TypeProduct, Integer> price) {
         this.speed = speed;
         this.price = price;
         this.name = name;
-        this.typeProducts = types;
     }
 
     public void info(DeliveryPackage pack) {
@@ -27,41 +31,30 @@ public abstract class DeliveryCompany implements DeliveryService {
         System.out.println("Стоимость доставки: " + currenPrice + " руб.");
     }
 
-    protected <K, V> int getExtraValue(K[] key, V[] value, DeliveryPackage pack) {
+    protected int getExtraValue(Map<TypeProduct, Integer> values, DeliveryPackage pack) {
         int extraValue = 0;
-        for (int i = 0; i < pack.getTypes().length; i++) {
-            for (int j = 0; j < key.length; j++) {
-                if (pack.getTypes()[i] == key[j]) {
-                    extraValue += (Integer) value[j];
-                    break;
-                }
-            }
+        for (TypeProduct typeProduct : pack.getTypes()) {
+            Integer val = values.get(typeProduct);
+            if (val != null) extraValue += val;
         }
         return extraValue;
     }
 
     public int getDeliveryPrice() {
-        return this.price;
+        return this.resultPrice;
     }
 
     public String getName() {
         return name;
     }
 
-    public boolean canDeliver(Product[] products) {
-        boolean allow;
+    public boolean canDeliver(ArrayList<Product> products) {
         for (Product product : products) {
-            allow = false;
-            for (TypeProduct typeProduct : typeProducts) {
-                if (product.getType() == typeProduct) {
-                    allow = true;
-                }
-            }
-            if (!allow) {
-                return false;
+            if(price.containsKey(product.getType())) {
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     @Override

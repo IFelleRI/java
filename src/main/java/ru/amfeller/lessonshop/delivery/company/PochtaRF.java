@@ -3,21 +3,36 @@ package ru.amfeller.lessonshop.delivery.company;
 import ru.amfeller.lessonshop.delivery.DeliveryPackage;
 import ru.amfeller.lessonshop.shop.product.TypeProduct;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 public class PochtaRF extends DeliveryCompany {
     public PochtaRF() {
-        super("Почта России", new TypeProduct[]{TypeProduct.DEFAULT, TypeProduct.DELICATE, TypeProduct.HEAVY}, 5, 500);
+        super(
+                "Почта России",
+                Map.of(
+                        TypeProduct.DEFAULT,1,
+                        TypeProduct.DELICATE,2,
+                        TypeProduct.HEAVY,1
+                ),
+                Map.of(
+                        TypeProduct.DEFAULT,500,
+                        TypeProduct.DELICATE,2000,
+                        TypeProduct.HEAVY,1000
+                )
+        );
     }
 
     @Override
     public int calculateSpeed(DeliveryPackage pack) {
-        int extraSpeed = getExtraValue(new TypeProduct[]{TypeProduct.DELICATE, TypeProduct.HEAVY}, new Integer[]{3, 2}, pack);
-        return this.speed + pack.getProducts().length + extraSpeed;
+        return speed.get(TypeProduct.DEFAULT) + pack.getProducts().size() + getExtraValue(speed, pack);
     }
 
     @Override
     public int calculateCost(DeliveryPackage pack) {
-        int extraPrice = getExtraValue(new TypeProduct[]{TypeProduct.DELICATE, TypeProduct.HEAVY}, new Integer[]{1000, 2000}, pack);
-        return (this.price * pack.getProducts().length) + extraPrice;
+        this.resultPrice = (price.get(TypeProduct.DEFAULT) * pack.getProducts().size()) + getExtraValue(price, pack);
+        return this.resultPrice;
     }
 
     @Override

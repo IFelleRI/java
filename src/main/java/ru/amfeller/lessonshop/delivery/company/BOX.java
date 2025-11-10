@@ -3,22 +3,35 @@ package ru.amfeller.lessonshop.delivery.company;
 import ru.amfeller.lessonshop.delivery.DeliveryPackage;
 import ru.amfeller.lessonshop.shop.product.TypeProduct;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 public class BOX extends DeliveryCompany {
 
     public BOX() {
-        super("BOX", new TypeProduct[]{TypeProduct.DEFAULT,TypeProduct.DELICATE}, 1, 2000);
+        super(
+                "BOX",
+                Map.of(
+                        TypeProduct.DEFAULT,1,
+                        TypeProduct.DELICATE,2
+                ),
+                Map.of(
+                        TypeProduct.DEFAULT,2000,
+                        TypeProduct.DELICATE,1000
+                )
+        );
     }
 
     @Override
     public int calculateSpeed(DeliveryPackage pack) {
-        int extraSpeed = getExtraValue(new TypeProduct[]{TypeProduct.DELICATE}, new Integer[]{2}, pack);
-        return this.speed + pack.getProducts().length + extraSpeed;
+        return speed.get(TypeProduct.DEFAULT) + pack.getProducts().size() + getExtraValue(speed, pack);
     }
 
     @Override
     public int calculateCost(DeliveryPackage pack) {
-        int extraPrice = getExtraValue(new TypeProduct[]{TypeProduct.DELICATE}, new Integer[]{1000}, pack);
-        return (this.price * pack.getProducts().length) + extraPrice;
+        this.resultPrice = (price.get(TypeProduct.DEFAULT) * pack.getProducts().size()) + getExtraValue(price, pack);
+        return this.resultPrice;
     }
 
     @Override

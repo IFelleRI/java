@@ -3,33 +3,18 @@ package ru.amfeller.lessonshop.shop;
 import ru.amfeller.lessonshop.shop.product.Product;
 import ru.amfeller.lessonshop.shop.product.TypeProduct;
 
+import java.util.ArrayList;
+
 public class Cart {
-    private Product[] products;
+    private ArrayList<Product> products = new ArrayList<>();
     private int sum;
 
     public void addProduct(Product product) {
-        if (products == null) {
-            products = new Product[]{product};
-            return;
-        }
-        Product[] tmpArr = new Product[products.length + 1];
-        for (int i = 0; i < products.length; i++) {
-            tmpArr[i] = products[i];
-        }
-        tmpArr[tmpArr.length - 1] = product;
-        this.products = tmpArr;
+        products.add(product);
     }
 
     public void removeProduct(int product) {
-        products[product] = null;
-        Product[] tmpArr = new Product[products.length - 1];
-        for (int i = 0, j = 0; i < products.length; i++) {
-            if (products[i] == null) {
-                continue;
-            }
-            tmpArr[j++] = products[i];
-        }
-        this.products = tmpArr;
+        products.remove(product);
     }
 
     public void buy(int deliveryPrice) {
@@ -61,7 +46,7 @@ public class Cart {
         return this.sum;
     }
 
-    public Product[] getProducts() {
+    public ArrayList<Product> getProducts() {
         return products;
     }
 

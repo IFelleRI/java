@@ -8,6 +8,8 @@ import ru.amfeller.lessonshop.shop.ShopUtils;
 import ru.amfeller.lessonshop.shop.product.Product;
 import ru.amfeller.lessonshop.user.State;
 
+import java.util.ArrayList;
+
 
 public class ShowCartOperation implements Operation {
     private final ShopSession shopSession;
@@ -21,8 +23,8 @@ public class ShowCartOperation implements Operation {
     @Override
     public void doOperation() {
         Cart cart = this.shopSession.getCart();
-        Product[] products = cart.getProducts();
-        if (products == null || products.length == 0) {
+        ArrayList<Product> products = cart.getProducts();
+        if (products.isEmpty()) {
             System.out.println("Корзина пустая");
             MenuNavigator.stepBack = true;
             return;

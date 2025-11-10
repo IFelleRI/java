@@ -7,6 +7,8 @@ import ru.amfeller.lessonshop.shop.ShopUtils;
 import ru.amfeller.lessonshop.shop.product.Product;
 import ru.amfeller.lessonshop.user.State;
 
+import java.util.ArrayList;
+
 public class BuyProductOperation implements Operation {
     private final ShopSession shopSession;
     private final State state;
@@ -18,11 +20,11 @@ public class BuyProductOperation implements Operation {
 
     @Override
     public void doOperation() {
-        Product[] products = shopSession.getCategoryProducts();
+        ArrayList<Product> products = shopSession.getCategoryProducts();
         Cart cart = shopSession.getCart();
         System.out.print("Введите № товара: ");
-        int option = ShopUtils.getChoice(products.length, "");
-        Product product = products[option];
+        int option = ShopUtils.getChoice(products.size(), "");
+        Product product = products.get(option);
         System.out.println("Купили товар: " + product.getName());
         cart.addProduct(product);
         this.shopSession.getUser().setUserState(this.state);

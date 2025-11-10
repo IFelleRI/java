@@ -17,6 +17,9 @@ public class PrintCategoriesOperation implements Operation {
     @Override
     public void doOperation() {
         ShopUtils.printToConsole(shopSession.getCategories(),"Категория");
+        System.out.print("Введите № категории: ");
+        int option = ShopUtils.getChoice(shopSession.getCategories().size(), "");
+        this.shopSession.setCategory(shopSession.getCategories().get(option));
         this.shopSession.getUser().setUserState(this.state);
     }
 }

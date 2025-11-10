@@ -4,23 +4,25 @@ import ru.amfeller.lessonshop.delivery.company.DeliveryCompany;
 import ru.amfeller.lessonshop.shop.product.Product;
 import ru.amfeller.lessonshop.user.User;
 
+import java.util.ArrayList;
+
 public class ShopSession {
     private final Cart cart;
-    private final Category[] categories;
+    private final ArrayList<Category> categories;
     private Category category;
-    private DeliveryCompany[] deliveryCompanies;
+    private ArrayList<DeliveryCompany> deliveryCompanies;
     private final User user;
     private DeliveryCompany tmpDeliveryCompany;
     private DeliveryCompany deliveryCompany;
 
-    public ShopSession(Cart cart, Category[] categories, DeliveryCompany[] companies, User user) {
+    public ShopSession(Cart cart, ArrayList<Category> categories, ArrayList<DeliveryCompany> companies, User user) {
         this.cart = cart;
         this.categories = categories;
         this.deliveryCompanies = companies;
         this.user = user;
     }
 
-    public Category[] getCategories() {
+    public ArrayList<Category> getCategories() {
         return categories;
     }
 
@@ -32,14 +34,14 @@ public class ShopSession {
         return cart;
     }
 
-    public Product[] getCategoryProducts() {
+    public ArrayList<Product> getCategoryProducts() {
         if (category != null && category.getProducts() != null) {
             return category.getProducts();
         }
         return null;
     }
 
-    public Product[] getCartProducts() {
+    public ArrayList<Product> getCartProducts() {
         return getCart().getProducts();
     }
 
@@ -47,11 +49,11 @@ public class ShopSession {
         this.category = category;
     }
 
-    public DeliveryCompany[] getCompanies() {
+    public ArrayList<DeliveryCompany> getCompanies() {
         return deliveryCompanies;
     }
 
-    public void setCompanies(DeliveryCompany[] companies) {
+    public void setCompanies(ArrayList<DeliveryCompany> companies) {
         this.deliveryCompanies = companies;
     }
 

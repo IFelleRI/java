@@ -3,21 +3,34 @@ package ru.amfeller.lessonshop.delivery.company;
 import ru.amfeller.lessonshop.delivery.DeliveryPackage;
 import ru.amfeller.lessonshop.shop.product.TypeProduct;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 public class CDEK extends DeliveryCompany {
     public CDEK() {
-        super("CDEK", new TypeProduct[]{TypeProduct.DEFAULT, TypeProduct.HEAVY}, 2, 1000);
+        super(
+                "CDEK",
+                Map.of(
+                        TypeProduct.DEFAULT,1,
+                        TypeProduct.HEAVY,2
+                ),
+                Map.of(
+                        TypeProduct.DEFAULT,2000,
+                        TypeProduct.HEAVY,500
+                )
+        );
     }
 
     @Override
     public int calculateSpeed(DeliveryPackage pack) {
-        int extraSpeed = getExtraValue(new TypeProduct[]{TypeProduct.HEAVY}, new Integer[]{2}, pack);
-        return this.speed + pack.getProducts().length + extraSpeed;
+        return speed.get(TypeProduct.DEFAULT) + pack.getProducts().size() + getExtraValue(speed, pack);
     }
 
     @Override
     public int calculateCost(DeliveryPackage pack) {
-        int extraPrice = getExtraValue(new TypeProduct[]{TypeProduct.HEAVY}, new Integer[]{500}, pack);
-        return (this.price * pack.getProducts().length) + extraPrice;
+        this.resultPrice = (price.get(TypeProduct.DEFAULT) * pack.getProducts().size()) + getExtraValue(price, pack);
+        return this.resultPrice;
     }
 
     @Override

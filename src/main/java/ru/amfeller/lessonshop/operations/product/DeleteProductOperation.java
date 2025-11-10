@@ -7,6 +7,8 @@ import ru.amfeller.lessonshop.shop.ShopSession;
 import ru.amfeller.lessonshop.shop.ShopUtils;
 import ru.amfeller.lessonshop.shop.product.Product;
 
+import java.util.ArrayList;
+
 public class DeleteProductOperation implements Operation {
     private final ShopSession shopSession;
 
@@ -15,10 +17,10 @@ public class DeleteProductOperation implements Operation {
     }
     @Override
     public void doOperation() {
-        Product[] products = shopSession.getCategoryProducts();
+        ArrayList<Product> products = shopSession.getCategoryProducts();
         Cart cart = shopSession.getCart();
         System.out.print("Введите № товара: ");
-        int option = ShopUtils.getChoice(products.length, "");
+        int option = ShopUtils.getChoice(products.size(), "");
         cart.removeProduct(option);
         MenuNavigator.stepBack = true;
     }

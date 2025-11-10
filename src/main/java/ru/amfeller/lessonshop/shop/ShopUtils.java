@@ -2,6 +2,7 @@ package ru.amfeller.lessonshop.shop;
 
 import ru.amfeller.lessonshop.shop.product.Product;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ShopUtils {
@@ -48,26 +49,26 @@ public class ShopUtils {
         System.out.println("----------------------------------------------------------");
     }
 
-    public static String printProducts(Product[] products) {
+    public static String printProducts(ArrayList<Product> products) {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("%-5s %-25s %10s%n", "№", "Товар", "Цена"));
         sb.append("----------------------------------------------------------\n");
-        for (int i = 0; i < products.length; i++) {
+        for (int i = 0; i < products.size(); i++) {
             sb.append(String.format("%-5d %-25s %8d руб.%n",
                     i + 1,
-                    products[i].getName(),
-                    products[i].getPrice()));
+                    products.get(i).getName(),
+                    products.get(i).getPrice()));
         }
         sb.append("----------------------------------------------------------\n");
         return sb.toString();
     }
 
-    public static <T> void printToConsole(T[] array, String title) {
+    public static <T> void printToConsole(ArrayList<T> array, String title) {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("%-5s %-15s%n", "№", title));
         sb.append("----------------------------------------------------------\n");
-        for (int i = 0; i < array.length; i++) {
-            sb.append(String.format("%-5d %-15s%n", i + 1, array[i]));
+        for (int i = 0; i < array.size(); i++) {
+            sb.append(String.format("%-5d %-15s%n", i + 1, array.get(i)));
         }
         sb.append("----------------------------------------------------------\n");
         System.out.println(sb);

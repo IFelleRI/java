@@ -2,15 +2,17 @@ package ru.amfeller.lessonshop.shop;
 
 import ru.amfeller.lessonshop.shop.product.Product;
 
+import java.util.ArrayList;
+
 public class Category {
     private String name;
-    private Product[] products;
+    private ArrayList<Product> products;
 
     public Category(String name) {
         this.name = name;
     }
 
-    public Category(String name, Product[] products) {
+    public Category(String name, ArrayList<Product> products) {
         this(name);
         this.products = products;
     }
@@ -19,7 +21,7 @@ public class Category {
         return name;
     }
 
-    public Product[] getProducts() {
+    public ArrayList<Product> getProducts() {
         return products;
     }
 

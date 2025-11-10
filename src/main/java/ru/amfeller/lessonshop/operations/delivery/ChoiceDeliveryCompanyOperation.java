@@ -5,6 +5,8 @@ import ru.amfeller.lessonshop.operations.Operation;
 import ru.amfeller.lessonshop.shop.ShopSession;
 import ru.amfeller.lessonshop.shop.ShopUtils;
 
+import java.util.ArrayList;
+
 public class ChoiceDeliveryCompanyOperation implements Operation {
     private final ShopSession shopSession;
 
@@ -14,11 +16,11 @@ public class ChoiceDeliveryCompanyOperation implements Operation {
 
     @Override
     public void doOperation() {
-        DeliveryCompany[] companies = shopSession.getCompanies();
+        ArrayList<DeliveryCompany> companies = shopSession.getCompanies();
         ShopUtils.printToConsole(companies,"Компания");
         System.out.print("Введите № компании: ");
-        int option = ShopUtils.getChoice(companies.length, "");
-        DeliveryCompany currentDeliveryCompany = companies[option];
+        int option = ShopUtils.getChoice(companies.size(), "");
+        DeliveryCompany currentDeliveryCompany = companies.get(option);
         shopSession.setTmpCompany(currentDeliveryCompany);
     }
 }

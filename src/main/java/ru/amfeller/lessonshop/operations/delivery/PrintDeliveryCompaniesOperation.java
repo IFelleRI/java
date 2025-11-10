@@ -7,6 +7,8 @@ import ru.amfeller.lessonshop.shop.ShopSession;
 import ru.amfeller.lessonshop.shop.ShopUtils;
 import ru.amfeller.lessonshop.user.State;
 
+import java.util.ArrayList;
+
 
 public class PrintDeliveryCompaniesOperation implements Operation {
     private final ShopSession shopSession;
@@ -25,20 +27,19 @@ public class PrintDeliveryCompaniesOperation implements Operation {
             return;
         }
         checkTypeDeliveryCompanies();
-        ShopUtils.printToConsole(shopSession.getCompanies(),"Компания");
+        ShopUtils.printToConsole(shopSession.getCompanies(), "Компания");
+        System.out.print("Введите № компании: ");
+        int option = ShopUtils.getChoice(shopSession.getCompanies().size(), "");
+        DeliveryCompany currentDeliveryCompany = shopSession.getCompanies().get(option);
+        shopSession.setTmpCompany(currentDeliveryCompany);
         this.shopSession.getUser().setUserState(this.state);
     }
 
     public void checkTypeDeliveryCompanies() {
-        DeliveryCompany[] tmp = new DeliveryCompany[0];
+        ArrayList<DeliveryCompany> tmp = new ArrayList<>();
         for (DeliveryCompany deliveryCompany : shopSession.getCompanies()) {
             if (deliveryCompany.canDeliver(shopSession.getCart().getProducts())) {
-                DeliveryCompany[] newArray = new DeliveryCompany[tmp.length + 1];
-                for (int i = 0; i < tmp.length; i++) {
-                    newArray[i] = tmp[i];
-                }
-                newArray[newArray.length - 1] = deliveryCompany;
-                tmp = newArray;
+                tmp.add(deliveryCompany);
             }
         }
         shopSession.setCompanies(tmp);
