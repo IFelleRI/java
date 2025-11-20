@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cart implements Serializable {
+public class Cart implements Serializable { //FixMe: По хорошему, сделать POJO
     @Serial
     private static final long serialVersionUID = 4L;
 

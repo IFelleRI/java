@@ -9,7 +9,7 @@ import java.io.FileWriter;
 import java.util.Base64;
 
 public class DataBase {
-    private static final String dbPath = ShopUtils.getRootPath() + "shopstore/user-database.txt";
+    private static final String dbPath = ShopUtils.getRootPath() + "shopstore/user-database.txt"; // FixMe: DB_PATH
 
     public static void add(String login, String password) {
         try (BufferedWriter db = new BufferedWriter(
@@ -22,12 +22,10 @@ public class DataBase {
     }
 
     public static User getUser(String login, String password) {
-        try (BufferedReader db = new BufferedReader(
-                new FileReader(dbPath))
-        ) {
+        try (BufferedReader db = new BufferedReader(new FileReader(dbPath))) {
             String line;
             while ((line = db.readLine()) != null) {
-                String loginDb = line.split(",")[0];
+                String loginDb = line.split(",")[0]; //FixMe: Можно вынести
                 String passwordDecoded = new String(Base64.getDecoder().decode(line.split(",")[1].getBytes()));
                 if (loginDb.equals(login) && passwordDecoded.equals(password)) {
                     return new User(login, password);

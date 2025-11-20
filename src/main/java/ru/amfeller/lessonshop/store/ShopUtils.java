@@ -3,6 +3,7 @@ package ru.amfeller.lessonshop.store;
 import ru.amfeller.lessonshop.store.exception.WrongChoiceException;
 import ru.amfeller.lessonshop.catalog.product.Product;
 
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Scanner;
 
@@ -76,6 +77,7 @@ public class ShopUtils {
     }
 
     public static String getRootPath(){
-        return "/Users/feller/Documents/JavaLessons/src/main/java/ru/amfeller/lessonshop/";
+        //FixMe: Хардкод пути. По заданию создаваться должно в папке запуска ПО.
+        return String.valueOf(Path.of("").toAbsolutePath() + "/");
     }
 }

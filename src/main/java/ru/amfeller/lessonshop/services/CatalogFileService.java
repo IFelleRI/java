@@ -12,7 +12,7 @@ import java.util.List;
 public class CatalogFileService {
     public void generateCatalogFile(List<Category> categories) {
         try (BufferedWriter writer = new BufferedWriter(
-                new FileWriter(ShopUtils.getRootPath() + "shopstore/catalog.txt"))
+                new FileWriter(ShopUtils.getRootPath() + "shopstore/catalog.txt")) //FixMe: Ошибка если папки не существует
         ) {
             for (Category category : categories) {
                 writer.write("category=" + category.getName() + "\n");
