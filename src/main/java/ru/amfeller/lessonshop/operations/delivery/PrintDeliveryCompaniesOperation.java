@@ -3,8 +3,8 @@ package ru.amfeller.lessonshop.operations.delivery;
 import ru.amfeller.lessonshop.delivery.company.DeliveryCompany;
 import ru.amfeller.lessonshop.menu.MenuNavigator;
 import ru.amfeller.lessonshop.operations.Operation;
-import ru.amfeller.lessonshop.shop.ShopSession;
-import ru.amfeller.lessonshop.shop.ShopUtils;
+import ru.amfeller.lessonshop.store.ShopSession;
+import ru.amfeller.lessonshop.store.ShopUtils;
 import ru.amfeller.lessonshop.user.State;
 
 import java.util.ArrayList;

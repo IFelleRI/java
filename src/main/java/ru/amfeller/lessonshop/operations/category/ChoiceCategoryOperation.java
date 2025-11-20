@@ -1,12 +1,12 @@
 package ru.amfeller.lessonshop.operations.category;
 
 import ru.amfeller.lessonshop.operations.Operation;
-import ru.amfeller.lessonshop.shop.Category;
-import ru.amfeller.lessonshop.shop.ShopSession;
-import ru.amfeller.lessonshop.shop.ShopUtils;
+import ru.amfeller.lessonshop.catalog.Category;
+import ru.amfeller.lessonshop.store.ShopSession;
+import ru.amfeller.lessonshop.store.ShopUtils;
 import ru.amfeller.lessonshop.user.State;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ChoiceCategoryOperation implements Operation {
     private final ShopSession shopSession;
@@ -19,7 +19,7 @@ public class ChoiceCategoryOperation implements Operation {
 
     @Override
     public void doOperation() {
-        ArrayList<Category> categories = shopSession.getCategories();
+        List<Category> categories = shopSession.getCategories();
         System.out.print("Введите № категории: ");
         int option = ShopUtils.getChoice(categories.size(), "");
         this.shopSession.setCategory(categories.get(option));

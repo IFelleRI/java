@@ -2,12 +2,12 @@ package ru.amfeller.lessonshop.operations.product;
 
 import ru.amfeller.lessonshop.menu.MenuNavigator;
 import ru.amfeller.lessonshop.operations.Operation;
-import ru.amfeller.lessonshop.shop.Cart;
-import ru.amfeller.lessonshop.shop.ShopSession;
-import ru.amfeller.lessonshop.shop.ShopUtils;
-import ru.amfeller.lessonshop.shop.product.Product;
+import ru.amfeller.lessonshop.catalog.cart.Cart;
+import ru.amfeller.lessonshop.store.ShopSession;
+import ru.amfeller.lessonshop.store.ShopUtils;
+import ru.amfeller.lessonshop.catalog.product.Product;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class DeleteProductOperation implements Operation {
     private final ShopSession shopSession;
@@ -17,7 +17,7 @@ public class DeleteProductOperation implements Operation {
     }
     @Override
     public void doOperation() {
-        ArrayList<Product> products = shopSession.getCategoryProducts();
+        List<Product> products = shopSession.getCategoryProducts();
         Cart cart = shopSession.getCart();
         System.out.print("Введите № товара: ");
         int option = ShopUtils.getChoice(products.size(), "");

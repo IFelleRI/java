@@ -1,8 +1,9 @@
-package ru.amfeller.lessonshop.shop;
+package ru.amfeller.lessonshop.store;
 
-import ru.amfeller.lessonshop.shop.product.Product;
+import ru.amfeller.lessonshop.store.exception.WrongChoiceException;
+import ru.amfeller.lessonshop.catalog.product.Product;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class ShopUtils {
@@ -49,21 +50,21 @@ public class ShopUtils {
         System.out.println("----------------------------------------------------------");
     }
 
-    public static String printProducts(ArrayList<Product> products) {
+    public static String printProducts(List<Product> products) {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("%-5s %-25s %10s%n", "№", "Товар", "Цена"));
         sb.append("----------------------------------------------------------\n");
         for (int i = 0; i < products.size(); i++) {
             sb.append(String.format("%-5d %-25s %8d руб.%n",
                     i + 1,
-                    products.get(i).getName(),
+                    products.get(i).getName()+" ("+products.get(i).getRating()+")",
                     products.get(i).getPrice()));
         }
         sb.append("----------------------------------------------------------\n");
         return sb.toString();
     }
 
-    public static <T> void printToConsole(ArrayList<T> array, String title) {
+    public static <T> void printToConsole(List<T> array, String title) {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("%-5s %-15s%n", "№", title));
         sb.append("----------------------------------------------------------\n");
@@ -72,5 +73,9 @@ public class ShopUtils {
         }
         sb.append("----------------------------------------------------------\n");
         System.out.println(sb);
+    }
+
+    public static String getRootPath(){
+        return "/Users/feller/Documents/JavaLessons/src/main/java/ru/amfeller/lessonshop/";
     }
 }

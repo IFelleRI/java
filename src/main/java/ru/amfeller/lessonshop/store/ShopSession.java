@@ -1,28 +1,30 @@
-package ru.amfeller.lessonshop.shop;
+package ru.amfeller.lessonshop.store;
 
+import ru.amfeller.lessonshop.catalog.cart.Cart;
+import ru.amfeller.lessonshop.catalog.Category;
 import ru.amfeller.lessonshop.delivery.company.DeliveryCompany;
-import ru.amfeller.lessonshop.shop.product.Product;
+import ru.amfeller.lessonshop.catalog.product.Product;
 import ru.amfeller.lessonshop.user.User;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ShopSession {
     private final Cart cart;
-    private final ArrayList<Category> categories;
+    private final List<Category> categories;
     private Category category;
-    private ArrayList<DeliveryCompany> deliveryCompanies;
+    private List<DeliveryCompany> deliveryCompanies;
     private final User user;
     private DeliveryCompany tmpDeliveryCompany;
     private DeliveryCompany deliveryCompany;
 
-    public ShopSession(Cart cart, ArrayList<Category> categories, ArrayList<DeliveryCompany> companies, User user) {
+    public ShopSession(Cart cart, List<Category> categories, List<DeliveryCompany> companies, User user) {
         this.cart = cart;
         this.categories = categories;
         this.deliveryCompanies = companies;
         this.user = user;
     }
 
-    public ArrayList<Category> getCategories() {
+    public List<Category> getCategories() {
         return categories;
     }
 
@@ -34,14 +36,14 @@ public class ShopSession {
         return cart;
     }
 
-    public ArrayList<Product> getCategoryProducts() {
+    public List<Product> getCategoryProducts() {
         if (category != null && category.getProducts() != null) {
             return category.getProducts();
         }
         return null;
     }
 
-    public ArrayList<Product> getCartProducts() {
+    public List<Product> getCartProducts() {
         return getCart().getProducts();
     }
 
@@ -49,11 +51,11 @@ public class ShopSession {
         this.category = category;
     }
 
-    public ArrayList<DeliveryCompany> getCompanies() {
+    public List<DeliveryCompany> getCompanies() {
         return deliveryCompanies;
     }
 
-    public void setCompanies(ArrayList<DeliveryCompany> companies) {
+    public void setCompanies(List<DeliveryCompany> companies) {
         this.deliveryCompanies = companies;
     }
 

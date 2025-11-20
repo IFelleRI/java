@@ -1,4 +1,4 @@
-package ru.amfeller.lessonshop.user;
+package ru.amfeller.lessonshop.user.exception;
 
 public class WrongPasswordException extends RuntimeException {
     public WrongPasswordException(String message) {

@@ -12,9 +12,12 @@ import ru.amfeller.lessonshop.operations.delivery.PrintDeliveryCompaniesOperatio
 import ru.amfeller.lessonshop.operations.delivery.ViewDeliveryCompanyOperation;
 import ru.amfeller.lessonshop.operations.product.BuyProductOperation;
 import ru.amfeller.lessonshop.operations.product.DeleteProductOperation;
+import ru.amfeller.lessonshop.operations.product.RatingProductOperation;
+import ru.amfeller.lessonshop.operations.product.ReviewProductOperation;
 import ru.amfeller.lessonshop.operations.user.LogoutOperation;
-import ru.amfeller.lessonshop.shop.Shop;
-import ru.amfeller.lessonshop.shop.ShopSession;
+import ru.amfeller.lessonshop.operations.user.ShowChecks;
+import ru.amfeller.lessonshop.store.Shop;
+import ru.amfeller.lessonshop.store.ShopSession;
 import ru.amfeller.lessonshop.user.State;
 
 public class MenuGenerator {
@@ -31,8 +34,10 @@ public class MenuGenerator {
         MenuComponent back = new MenuItem("Назад", new BackOperation());
         MenuComponent backToHome = new MenuItem("В главное меню", new BackToMainMenuOperation());
 
+
+        MenuComponent ratingProduct = new MenuItem("Рейтинг", new RatingProductOperation(shopSession));
         MenuComponent buyProduct = new MenuItem("Купить продукт", new BuyProductOperation(shopSession,State.VIEWING_PRODUCTS));
-        MenuComponent categoryView = new Menu("Категория: такая то", new ViewCategoryProductsOperation(shopSession,State.VIEWING_PRODUCTS));
+        MenuComponent categoryView = new Menu("Категория", new ViewCategoryProductsOperation(shopSession,State.VIEWING_PRODUCTS));
 
         MenuComponent purchaseCart = new MenuItem("Оформить заказ", new PurchaseCartOperation(shopSession,State.CHECKOUT));
         MenuComponent confirmChoice = new MenuItem("Подтвердить выбор", new ConfirmDeliverySelectionOperation(shopSession));
@@ -45,6 +50,7 @@ public class MenuGenerator {
 
         MenuComponent exitShop = new MenuItem("Выход", new ExitOperation());
         MenuComponent logOut = new MenuItem("Выйти из профиля", new LogoutOperation(shop));
+        MenuComponent checks = new MenuItem("Чеки", new ShowChecks(shopSession));
         MenuComponent categoryList = new Menu("Категории", new PrintCategoriesOperation(shopSession,State.VIEWING_CATEGORIES),true);
         MenuComponent cartMenu = new Menu("Корзина", new ShowCartOperation(shopSession,State.VIEWING_CATEGORIES));
         MenuComponent mainMenu = new Menu("Главное меню");
@@ -77,6 +83,7 @@ public class MenuGenerator {
                 categoryView,
                 new MenuComponent[]{
                         buyProduct,
+                        ratingProduct,
                         back,
                         backToHome
                 }
@@ -92,6 +99,7 @@ public class MenuGenerator {
                 new MenuComponent[]{
                         categoryList,
                         cartMenu,
+                        checks,
                         logOut,
                         exitShop
                 }

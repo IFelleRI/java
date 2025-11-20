@@ -2,13 +2,13 @@ package ru.amfeller.lessonshop.operations.cart;
 
 import ru.amfeller.lessonshop.menu.MenuNavigator;
 import ru.amfeller.lessonshop.operations.Operation;
-import ru.amfeller.lessonshop.shop.Cart;
-import ru.amfeller.lessonshop.shop.ShopSession;
-import ru.amfeller.lessonshop.shop.ShopUtils;
-import ru.amfeller.lessonshop.shop.product.Product;
+import ru.amfeller.lessonshop.catalog.cart.Cart;
+import ru.amfeller.lessonshop.store.ShopSession;
+import ru.amfeller.lessonshop.store.ShopUtils;
+import ru.amfeller.lessonshop.catalog.product.Product;
 import ru.amfeller.lessonshop.user.State;
 
-import java.util.ArrayList;
+import java.util.List;
 
 
 public class ShowCartOperation implements Operation {
@@ -23,7 +23,7 @@ public class ShowCartOperation implements Operation {
     @Override
     public void doOperation() {
         Cart cart = this.shopSession.getCart();
-        ArrayList<Product> products = cart.getProducts();
+        List<Product> products = cart.getProducts();
         if (products.isEmpty()) {
             System.out.println("Корзина пустая");
             MenuNavigator.stepBack = true;

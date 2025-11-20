@@ -1,4 +1,4 @@
-package ru.amfeller.lessonshop.shop;
+package ru.amfeller.lessonshop.store.exception;
 
 public class WrongChoiceException extends RuntimeException {
     public WrongChoiceException(){

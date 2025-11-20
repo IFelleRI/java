@@ -1,32 +1,32 @@
 package ru.amfeller.lessonshop.operations.product;
 
+import ru.amfeller.lessonshop.catalog.product.Product;
 import ru.amfeller.lessonshop.operations.Operation;
-import ru.amfeller.lessonshop.catalog.cart.Cart;
+import ru.amfeller.lessonshop.services.CatalogFileService;
 import ru.amfeller.lessonshop.store.ShopSession;
 import ru.amfeller.lessonshop.store.ShopUtils;
-import ru.amfeller.lessonshop.catalog.product.Product;
-import ru.amfeller.lessonshop.user.State;
 
 import java.util.List;
+import java.util.Scanner;
 
-public class BuyProductOperation implements Operation {
+public class RatingProductOperation implements Operation {
     private final ShopSession shopSession;
-    private final State state;
+    private final Scanner scanner = new Scanner(System.in);
+    private final CatalogFileService service = new CatalogFileService();
 
-    public BuyProductOperation(ShopSession shopSession, State state) {
+    public RatingProductOperation(ShopSession shopSession) {
         this.shopSession = shopSession;
-        this.state = state;
     }
 
     @Override
     public void doOperation() {
         List<Product> products = shopSession.getCategoryProducts();
-        Cart cart = shopSession.getCart();
         System.out.print("Введите № товара: ");
         int option = ShopUtils.getChoice(products.size(), "");
         Product product = products.get(option);
-        System.out.println("Купили товар: " + product.getName());
-        cart.addProduct(product);
-        this.shopSession.getUser().setUserState(this.state);
+        System.out.print("Введите рейтинг 1-5: ");
+        int rating = scanner.nextInt();
+        product.setRating(rating);
+        service.generateCatalogFile(shopSession.getCategories());
     }
 }

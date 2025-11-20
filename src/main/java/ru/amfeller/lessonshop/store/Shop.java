@@ -1,17 +1,18 @@
-package ru.amfeller.lessonshop.shop;
+package ru.amfeller.lessonshop.store;
 
+import ru.amfeller.lessonshop.catalog.cart.Cart;
+import ru.amfeller.lessonshop.catalog.Category;
 import ru.amfeller.lessonshop.delivery.company.DeliveryCompany;
 import ru.amfeller.lessonshop.menu.MenuGenerator;
 import ru.amfeller.lessonshop.user.Auth;
 import ru.amfeller.lessonshop.user.User;
-
-import java.util.ArrayList;
+import java.util.List;
 
 public class Shop {
-    private final ArrayList<Category> categories;
-    private final ArrayList<DeliveryCompany> deliveryCompanies;
+    private final List<Category> categories;
+    private final List<DeliveryCompany> deliveryCompanies;
 
-    public Shop(ArrayList<Category> categories, ArrayList<DeliveryCompany> companies) {
+    public Shop(List<Category> categories, List<DeliveryCompany> companies) {
         this.categories = categories;
         this.deliveryCompanies = companies;
     }

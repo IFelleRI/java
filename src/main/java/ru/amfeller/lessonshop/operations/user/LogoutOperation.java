@@ -1,7 +1,7 @@
 package ru.amfeller.lessonshop.operations.user;
 
 import ru.amfeller.lessonshop.operations.Operation;
-import ru.amfeller.lessonshop.shop.Shop;
+import ru.amfeller.lessonshop.store.Shop;
 
 public class LogoutOperation implements Operation {
     private final Shop shop;

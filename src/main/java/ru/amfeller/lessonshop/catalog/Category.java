@@ -1,27 +1,32 @@
-package ru.amfeller.lessonshop.shop;
+package ru.amfeller.lessonshop.catalog;
 
-import ru.amfeller.lessonshop.shop.product.Product;
+import ru.amfeller.lessonshop.catalog.product.Product;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Category {
     private String name;
-    private ArrayList<Product> products;
+    private List<Product> products = new ArrayList<>();
 
     public Category(String name) {
         this.name = name;
     }
 
-    public Category(String name, ArrayList<Product> products) {
+    public Category(String name, List<Product> products) {
         this(name);
         this.products = products;
+    }
+
+    public void addProduct(Product product) {
+        products.add(product);
     }
 
     public String getName() {
         return name;
     }
 
-    public ArrayList<Product> getProducts() {
+    public List<Product> getProducts() {
         return products;
     }
 

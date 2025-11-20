@@ -2,10 +2,10 @@ package ru.amfeller.lessonshop.operations.delivery;
 
 import ru.amfeller.lessonshop.delivery.company.DeliveryCompany;
 import ru.amfeller.lessonshop.operations.Operation;
-import ru.amfeller.lessonshop.shop.ShopSession;
-import ru.amfeller.lessonshop.shop.ShopUtils;
+import ru.amfeller.lessonshop.store.ShopSession;
+import ru.amfeller.lessonshop.store.ShopUtils;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ChoiceDeliveryCompanyOperation implements Operation {
     private final ShopSession shopSession;
@@ -16,7 +16,7 @@ public class ChoiceDeliveryCompanyOperation implements Operation {
 
     @Override
     public void doOperation() {
-        ArrayList<DeliveryCompany> companies = shopSession.getCompanies();
+        List<DeliveryCompany> companies = shopSession.getCompanies();
         ShopUtils.printToConsole(companies,"Компания");
         System.out.print("Введите № компании: ");
         int option = ShopUtils.getChoice(companies.size(), "");

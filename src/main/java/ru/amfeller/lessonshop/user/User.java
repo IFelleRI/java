@@ -1,18 +1,26 @@
 package ru.amfeller.lessonshop.user;
 
-import ru.amfeller.lessonshop.shop.Cart;
+import ru.amfeller.lessonshop.catalog.cart.Cart;
+import ru.amfeller.lessonshop.services.CartFileService;
+import ru.amfeller.lessonshop.services.CheckFileService;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class User {
-    private String login;
-    private String password;
+public class User implements Serializable {
+    private final String login;
+    private final String password;
     private Cart cart;
     private String userState;
+    private final CartFileService service = new CartFileService();
 
     public User(String login, String password) {
         this.login = login;
         this.password = password;
+    }
+
+    public String getLogin() {
+        return login;
     }
 
     public Cart getCart() {
@@ -23,12 +31,8 @@ public class User {
         this.cart = cart;
     }
 
-    public void getUserState() {
-        System.out.println(userState);
-    }
-
     public void setUserState(State userState) {
-        this.userState += userState+"\n";
+        this.userState += userState + "\n";
     }
 
     @Override

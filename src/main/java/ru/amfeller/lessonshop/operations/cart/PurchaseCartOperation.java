@@ -2,8 +2,8 @@ package ru.amfeller.lessonshop.operations.cart;
 
 import ru.amfeller.lessonshop.menu.MenuNavigator;
 import ru.amfeller.lessonshop.operations.Operation;
-import ru.amfeller.lessonshop.shop.Cart;
-import ru.amfeller.lessonshop.shop.ShopSession;
+import ru.amfeller.lessonshop.catalog.cart.Cart;
+import ru.amfeller.lessonshop.store.ShopSession;
 import ru.amfeller.lessonshop.user.State;
 
 public class PurchaseCartOperation implements Operation {

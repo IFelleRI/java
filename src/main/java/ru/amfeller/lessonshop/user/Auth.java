@@ -1,11 +1,15 @@
 package ru.amfeller.lessonshop.user;
 
-import ru.amfeller.lessonshop.shop.Cart;
+import ru.amfeller.lessonshop.catalog.cart.Cart;
+import ru.amfeller.lessonshop.services.CartFileService;
+import ru.amfeller.lessonshop.user.exception.WrongLoginException;
+import ru.amfeller.lessonshop.user.exception.WrongPasswordException;
 
 import java.util.Scanner;
 
 public class Auth {
-    public static final Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
+    private final CartFileService service = new CartFileService();
 
     public User start() {
         while (true) {
@@ -28,15 +32,21 @@ public class Auth {
 
     private User login(String login, String password) {
         User authUser = new User(login, password);
-        User existsUser = DataBase.getUser(authUser);
+        User existsUser = DataBase.getUser(login, password);
 
         if (existsUser != null) {
             System.out.println("Пользователь авторизован");
+            Cart cart = service.getCart(login);
+            cart.setUser(existsUser);
+            existsUser.setCart(cart);
             return existsUser;
         }
+
         if (register(login, password)) {
-            DataBase.add(authUser);
-            authUser.setCart(new Cart());
+            DataBase.add(login, password);
+            Cart cart = service.getCart(login);
+            cart.setUser(authUser);
+            authUser.setCart(cart);
             System.out.println("Пользователь зареган и авторизован");
             return authUser;
         }

@@ -1,10 +1,8 @@
 package ru.amfeller.lessonshop.delivery.company;
 
 import ru.amfeller.lessonshop.delivery.DeliveryPackage;
-import ru.amfeller.lessonshop.shop.product.TypeProduct;
+import ru.amfeller.lessonshop.catalog.product.TypeProduct;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class CDEK extends DeliveryCompany {

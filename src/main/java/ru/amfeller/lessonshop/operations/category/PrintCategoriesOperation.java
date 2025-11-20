@@ -1,8 +1,8 @@
 package ru.amfeller.lessonshop.operations.category;
 
 import ru.amfeller.lessonshop.operations.Operation;
-import ru.amfeller.lessonshop.shop.ShopSession;
-import ru.amfeller.lessonshop.shop.ShopUtils;
+import ru.amfeller.lessonshop.store.ShopSession;
+import ru.amfeller.lessonshop.store.ShopUtils;
 import ru.amfeller.lessonshop.user.State;
 
 public class PrintCategoriesOperation implements Operation {

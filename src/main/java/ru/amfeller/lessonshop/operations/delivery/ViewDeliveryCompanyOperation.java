@@ -5,7 +5,7 @@ import ru.amfeller.lessonshop.delivery.AddressForm;
 import ru.amfeller.lessonshop.delivery.DeliveryPackage;
 import ru.amfeller.lessonshop.menu.MenuNavigator;
 import ru.amfeller.lessonshop.operations.Operation;
-import ru.amfeller.lessonshop.shop.ShopSession;
+import ru.amfeller.lessonshop.store.ShopSession;
 import ru.amfeller.lessonshop.user.State;
 
 public class ViewDeliveryCompanyOperation implements Operation {

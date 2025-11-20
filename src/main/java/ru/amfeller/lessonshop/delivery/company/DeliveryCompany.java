@@ -1,16 +1,14 @@
 package ru.amfeller.lessonshop.delivery.company;
 
 import ru.amfeller.lessonshop.delivery.DeliveryPackage;
-import ru.amfeller.lessonshop.shop.ShopUtils;
-import ru.amfeller.lessonshop.shop.product.Product;
-import ru.amfeller.lessonshop.shop.product.TypeProduct;
+import ru.amfeller.lessonshop.store.ShopUtils;
+import ru.amfeller.lessonshop.catalog.product.Product;
+import ru.amfeller.lessonshop.catalog.product.TypeProduct;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public abstract class DeliveryCompany implements DeliveryService {
-    protected ArrayList<TypeProduct> typeProducts;
     protected Map<TypeProduct, Integer> speed;
     protected Map<TypeProduct, Integer> price;
     protected String name;
@@ -34,6 +32,7 @@ public abstract class DeliveryCompany implements DeliveryService {
     protected int getExtraValue(Map<TypeProduct, Integer> values, DeliveryPackage pack) {
         int extraValue = 0;
         for (TypeProduct typeProduct : pack.getTypes()) {
+            if(typeProduct == TypeProduct.DEFAULT) continue;
             Integer val = values.get(typeProduct);
             if (val != null) extraValue += val;
         }
@@ -48,7 +47,7 @@ public abstract class DeliveryCompany implements DeliveryService {
         return name;
     }
 
-    public boolean canDeliver(ArrayList<Product> products) {
+    public boolean canDeliver(List<Product> products) {
         for (Product product : products) {
             if(price.containsKey(product.getType())) {
                 return true;

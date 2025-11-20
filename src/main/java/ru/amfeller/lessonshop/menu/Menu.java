@@ -3,7 +3,7 @@ package ru.amfeller.lessonshop.menu;
 import ru.amfeller.lessonshop.operations.Operation;
 import ru.amfeller.lessonshop.operations.common.BackOperation;
 import ru.amfeller.lessonshop.operations.common.BackToMainMenuOperation;
-import ru.amfeller.lessonshop.shop.ShopUtils;
+import ru.amfeller.lessonshop.store.ShopUtils;
 
 public class Menu implements MenuComponent {
     private MenuComponent[] items;

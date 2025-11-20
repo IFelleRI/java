@@ -2,7 +2,7 @@ package ru.amfeller.lessonshop.operations.delivery;
 
 import ru.amfeller.lessonshop.menu.MenuNavigator;
 import ru.amfeller.lessonshop.operations.Operation;
-import ru.amfeller.lessonshop.shop.ShopSession;
+import ru.amfeller.lessonshop.store.ShopSession;
 
 public class ConfirmDeliverySelectionOperation implements Operation {
 
