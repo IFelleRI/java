@@ -1,0 +1,9 @@
+category=Кровати
+products=[name=Кровать#price=1000#type=DEFAULT#rating=4],[name=Кровать 2#price=2000#type=DEFAULT#rating=0],[name=Кровать 3#price=3000#type=DEFAULT#rating=0]
+category=Посуда
+
+products=[name=Набор тарелок#price=1000#type=DELICATE#rating=0],[name=Набор стаканов#price=2000#type=DELICATE#rating=0],[name=Набор ножей#price=3000#type=DELICATE#rating=0]
+category=Диваны
+
+
+products=[name=Диван#rating=0],[name=Диван 2#price=2000#type=HEAVY#rating=0],[name=Диван 3#price=3000#type=HEAVY#rating=0]
